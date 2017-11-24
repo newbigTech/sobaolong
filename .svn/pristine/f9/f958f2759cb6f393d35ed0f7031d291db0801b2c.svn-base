@@ -1,0 +1,199 @@
+<template>
+    <div class='content'>
+        <div class="breadcrumb">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item>信息查询</el-breadcrumb-item>
+                <el-breadcrumb-item>经营信息</el-breadcrumb-item>
+                <el-breadcrumb-item>充值明细</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class='search' @keyup.enter="onSearch()">
+            <el-form :inline="true" :model="formInline" class="demo-form-inline">
+               <el-row>
+                <el-col :span="24">
+                    <el-form-item label="按区域搜索">
+                        <el-autocomplete class="inline-input"  v-model='formInline.search' placeholder="输入全国或具体地域"  :fetch-suggestions="queryAreaSearch"
+                           :trigger-on-focus="false" @select="handleAreaSelect"></el-autocomplete>
+                    </el-form-item> 
+                    <el-form-item label="从">
+                        <el-date-picker v-model="formInline.fromDate" align="right" type="date" placeholder="选择起始日期" :picker-options="pickerOptions" @change="firstDateChange"></el-date-picker>
+                    </el-form-item>
+                    <el-form-item label="到">
+                        <el-date-picker v-model="formInline.toDate" align="right" type="date" placeholder="选择结束日期" :picker-options="pickerOptions" @change="lastDateChange"></el-date-picker>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSearch()" icon="search">查询</el-button>
+                    </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+        </div>
+        <div class="userlist">
+            <el-table :data="tableData" stripe border style="width: 100%" :height="$store.state.tableHeight" type="selection" v-loading="loading">
+                <el-table-column prop="sn" label="业务流水号"></el-table-column>
+                <el-table-column prop="phoneNumber" label="会员手机号"></el-table-column>
+                <el-table-column prop="user_name"  label="姓名"></el-table-column>
+                <el-table-column prop="user_spreadCode" label="账户"></el-table-column>
+                <el-table-column prop="user_area" label="地址/区域"></el-table-column>
+                <el-table-column prop="amount" label="充值金额"></el-table-column>
+                <el-table-column prop="createDate" label="交易时间"></el-table-column>
+                <el-table-column prop="PayType" label="支付方式"></el-table-column>
+            </el-table>
+            <div class="pagination" v-if="show">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-size="pageSize"
+                    layout="total, prev, pager, next"
+                    :total="total">
+                </el-pagination>
+            </div>
+        </div>       
+    </div>
+</template>
+
+<script>
+  import * as SITEURL from '@/store/app-urls'
+  export default {
+    name: 'user',
+    data () {
+      return {
+        formInline: {
+          search: '',
+          fromDate: '',
+          toDate: ''
+        },
+        tableData: [],
+        currentPage: 1,  // 当前页
+        pageSize: 1,  // 每页多少条记录
+        total: 1,  // 共多少条记录
+        loading: false,
+        fromDate: '',
+        endDate: '',
+        show: false,
+        pickerOptions: {
+          shortcuts: [{
+            text: '今天',
+            onClick (picker) {
+              picker.$emit('pick', new Date())
+            }
+          }, {
+            text: '昨天',
+            onClick (picker) {
+              const date = new Date()
+              date.setTime(date.getTime() - 3600 * 1000 * 24)
+              picker.$emit('pick', date)
+            }
+          }, {
+            text: '一周前',
+            onClick (picker) {
+              const date = new Date()
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', date)
+            }
+          }]
+        }
+      }
+    },
+    created: function () {
+      this.loading = true
+      this.loadingsetTimeout()
+    },
+    methods: {
+      loadingsetTimeout () {
+        setTimeout(() => { this.loading = false }, 800)
+      },
+      onSearch (page = 1) {
+        var text = this.formInline.search.trim()
+        let num = ''
+        if (!text || text === '全国') {
+          num = 1
+        }
+        this.loading = true
+        this.formatFirstTime = this.formatFirstTime === undefined ? '' : this.formatFirstTime
+        this.formatLastTime = this.formatLastTime === undefined ? '' : this.formatLastTime
+      // 发送请求
+        this.$axios.get(SITEURL.RECHARGE_SEARCH + '?first_time=' + this.formatFirstTime + '&area=' + text + '&area_type=' + num + '&page=' + page + '&limit=15' + '&last_time=' + this.formatLastTime).then(response => {
+          if (response.data.success) {
+            this.loading = false
+            this.show = true
+            this.tableData = response.data.data.data
+            this.total = response.data.data.total
+            this.pageSize = parseInt(response.data.data.per_page)
+          } else {
+            this.loading = false
+            this.$message.warning(response.data.message)
+          }
+        }).catch(error => {
+          this.loading = false
+          console.log(error)
+        })
+      },
+      handleSizeChange (val) {
+        console.log(`每页 ${val} 条`)
+      },
+      handleCurrentChange (val) {
+        this.loading = true
+        this.onSearch(val)
+      },
+      firstDateChange (val) {
+        this.formatFirstTime = val
+      },
+      lastDateChange (val) {
+        this.formatLastTime = val
+      },
+      queryAreaSearch (queryString, cb) {
+        var results = []
+        if (/^[\u4e00-\u9fa5]+$/.test(queryString) && queryString.length >= 3) {
+          this.$axios.get(SITEURL.AUTOCOMPLETE_AREA + '?text=' + queryString).then(response => {
+            results = response.data.data
+            // 调用 callback 返回建议列表的数据
+            cb(results)
+          }).catch(error => {
+            console.log(error)
+          })
+        } else {
+          cb(results)
+        }
+      },
+      handleAreaSelect (item) {
+        this.formInline.areaId = item.id
+      }
+    }
+  }
+</script>
+
+
+
+<style scoped>
+     .el-form-item {
+        margin-bottom: 0 !important;
+    }
+    .breadcrumb {
+        margin: 20px 0 20px 0;
+    }
+    .search {
+        padding: 20px;
+        background: #d3dce6;
+    }
+    .userlist {
+        padding-top: 20px;
+    }
+    .demo-table-expand {
+        font-size: 0;
+    }
+    .demo-table-expand label {
+        width: 100px;
+        color: #99a9bf;
+    }
+    
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 30%;
+    }
+    .inline-input {
+        width: 170px;
+        margin-right: 20px;
+    }
+    
+</style>

@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding-right: 0 !important;
+}
+
+#menubar {
+  background-color: #1f2d3d;
+}
+#footer {
+  background-color: #48576a;
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+.breadcrumb {
+  margin: 20px 0 20px 0;
+}
+.content {
+  height: 801px;
+  margin: 25px;
+}
+.contentlist {
+  padding-top: 20px;
+}
+
+.sidebar {
+  background-color: #1f2d3d;
+  min-height: 851px;
+}
+.sidebar a {
+  text-decoration: none;
+  color: #bfcbd9;
+}
+
+.pagination {
+  padding: 10px;
+  text-align: right;
+}
+
+.search-input {
+  width: 220px;
+}

@@ -1,0 +1,92 @@
+
+bisinessOrBuyer: 0, // 0:商户，1:买家；默认根据商户查询，即：不传的话，默认为0
+              name:1398232323, // 账户
+              pageNum: 1, // 必传
+              pageSize: 15, // 必传
+              orderStartDate: this.formInline.fromDate,
+              orderEndDate: this.formInline.toDate,
+              status: 1, // 有status这个条件就没有orderId
+              orderId: '' // 有orderId这个条件就没有status
+
+
+
+
+
+
+
+
+192.168.31.104:8901/SoBoLongShop/admin/member/goods/list_all.jhtml?json={%22pageNum%22:1,%22pageSize%22:20}
+
+
+
+
+
+
+
+
+18628050688
+a111111
+
+区域
+15680052212
+a11111
+
+张凯 18081127915 a123456
+
+
+代理 18502877185 a123456
+
+15102864306 a123456
+
+18081127915 a11111
+
+13699439455
+
+赵李
+17360092610
+公司官网
+https://modao.cc/app/XxDQtW6LYuMPg3EoyybPrGmkIq2Po6u 
+
+https://www.iyoulang.cc/
+
+http://member.sobolong.cn/#/
+
+盛龙宝APP的PC端：http://member.sobolong.cn/#/
+http://member.sobolong.cn/#/servicespecialrecomend
+
+http://www.sobolong.com/index
+
+
+<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=AwdwPYavQusOwXfk_WSOTu_MgApokth4oDt0PycbXEf0bwU5gzOE!-448848588/ 
+
+">蜀ICP备17014037号-2</a>
+
+
+操作步骤
+1.请备份好本机代码
+2.重新checkout一份下来
+3.用备份代码中修改的部分去覆盖checkout下来的代码
+4.提交修改
+@全体成员 
+现在的代码已经tag为tag_release_1.4
+rhinoceros(3029238)  12:15:12
+要修改bug，从 tag_release_1.4拉一个分支到branches
+修改完成后merge到 tag_release_1.4
+新的功能在trunk下继续开发
+
+
+svn://svn.sobolong.cn/repo/solongbo/backendweb
+svn://svn.sobolong.cn/repo/solongbo/backendweb
+superadmin  123456
+
+pc
+svn://svn.sobolong.cn/repo/slbmember/web/trunk
+
+
+http://www.sobolong.cn:8888/admin/home#/login suadmin
+
+
+http://192.168.31.52:8901/SoBoLongShop/admin/member/shoporder/get_list.jhtml
+
+
+http://39.108.103.235:8901

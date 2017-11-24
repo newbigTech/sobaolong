@@ -1,0 +1,603 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+import Menubar from '@/components/Menubar.vue'
+import Login from '@/components/Login.vue'
+import LoginBody from '@/components/LoginBody.vue'
+
+// 消费者组件
+import CustomerSidebar from '@/components/customer/CustomerSidebar'
+import CustomerList from '@/components/customer/CustomerList'
+import CustomerDisabled from '@/components/customer/CustomerDisabled'
+import CustomerEdit from '@/components/customer/CustomerEdit'
+import BankCardList from '@/components/customer/BankCardList'
+
+// 仪表盘组件
+import DashBoardSidebar from '@/components/dashboard/DashBoardSidebar'
+import DashBoard from '@/components/dashboard/DashBoard'
+
+// 商家管理组件
+import MerchantSidebar from '@/components/merchant/MerchantSidebar'
+import MerchantList from '@/components/merchant/MerchantList'
+import MerchantDisabled from '@/components/merchant/MerchantDisabled'
+import MerchantAudit from '@/components/merchant/MerchantAudit'
+import MerchantRefused from '@/components/merchant/MerchantRefused'
+import MerchantEdit from '@/components/merchant/MerchantEdit'
+
+// 激励奖励组件
+import RewardSidebar from '@/components/reward/RewardSidebar'
+import XinCoinList from '@/components/reward/XinCoinList'
+import YiCoinList from '@/components/reward/YiCoinList'
+
+// 财务组件
+import FinanceSidebar from '@/components/finance/FinanceSidebar'
+
+// 提现组件
+import WithdrawCAudit from '@/components/withdraw/WithdrawCAudit'
+import WithdrawCList from '@/components/withdraw/WithdrawCList'
+import WithdrawMAudit from '@/components/withdraw/WithdrawMAudit'
+import WithdrawMList from '@/components/withdraw/WithdrawMList'
+
+// 资讯与广告组件
+import InformSidebar from '@/components/inform/InformSidebar'
+import AdvertiseList from '@/components/inform/AdvertiseList'
+import AdvertiseDisabled from '@/components/inform/AdvertiseDisabled'
+import AdvertiseCreate from '@/components/inform/AdvertiseCreate'
+import AdvertiseEdit from '@/components/inform/AdvertiseEdit'
+import NoticeList from '@/components/inform/NoticeList'
+import NoticeDisabled from '@/components/inform/NoticeDisabled'
+import NoticeEdit from '@/components/inform/NoticeEdit'
+import NoticeCreate from '@/components/inform/NoticeCreate'
+import NewsList from '@/components/inform/NewsList'
+import NewsCreate from '@/components/inform/NewsCreate'
+import NewsEdit from '@/components/inform/NewsEdit'
+
+// 商务中心组件
+import BusinessSidebar from '@/components/business/BusinessSidebar'
+import ConsumptionOrderAudit from '@/components/business/ConsumptionOrderAudit'
+import ConsumptionOrderList from '@/components/business/ConsumptionOrderList'
+import ConsumptionOrderPay from '@/components/business/ConsumptionOrderPay'
+import MerchantRechargeList from '@/components/business/MerchantRechargeList'
+import MerchantRecharge from '@/components/business/MerchantRecharge'
+
+// 设置组件
+import SettingSidebar from '@/components/setting/SettingSidebar'
+import MerchantCategory from '@/components/setting/MerchantCategory'
+import MCategoryCreate from '@/components/setting/MCategoryCreate'
+import Tag from '@/components/setting/Tag'
+import TagCreate from '@/components/setting/TagCreate'
+import GlobalSetting from '@/components/setting/GlobalSetting'
+import AppUpgrade from '@/components/setting/AppUpgrade'
+
+// 系统管理组件
+import SystemSidebar from '@/components/system/SystemSidebar'
+import Manager from '@/components/system/Manager'
+import ManagerCreate from '@/components/system/ManagerCreate'
+import Role from '@/components/system/Role'
+import RoleCreate from '@/components/system/RoleCreate'
+import Permission from '@/components/system/Permission'
+import PermissionCreate from '@/components/system/PermissionCreate'
+import PermissionRole from '@/components/system/PermissionRole'
+import Agent from '@/components/system/Agent'
+import AgentCreate from '@/components/system/AgentCreate'
+
+// 代理商
+import AgentSidebar from '@/components/agent/AgentSidebar'
+import AgentMerchantList from '@/components/agent/AgentMerchantList'
+import AgentBusiness from '@/components/agent/AgentBusiness'
+import AgentDashboard from '@/components/agent/AgentDashboard'
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/login',
+      name: 'Login',
+      components: {
+        menubar: LoginBody,
+        sidebar: LoginBody,
+        content: Login
+      }
+    },
+    {
+      path: '/',
+      name: 'DashBoard',
+      components: {
+        menubar: Menubar,
+        sidebar: DashBoardSidebar,
+        content: DashBoard
+      }
+    },
+
+    // 消费者
+    {
+      path: '/customer/list',
+      name: 'CustomerList',
+      components: {
+        menubar: Menubar,
+        sidebar: CustomerSidebar,
+        content: CustomerList
+      }
+    },
+    {
+      path: '/customer/disabled',
+      name: 'CustomerDisabled',
+      components: {
+        menubar: Menubar,
+        sidebar: CustomerSidebar,
+        content: CustomerDisabled
+      }
+    },
+    {
+      path: '/customer/edit',
+      name: 'CustomerEdit',
+      components: {
+        menubar: Menubar,
+        sidebar: CustomerSidebar,
+        content: CustomerEdit
+      }
+    },
+    {
+      path: '/customer/withdraw/list',
+      name: 'WithdrawCuList',
+      components: {
+        menubar: Menubar,
+        sidebar: CustomerSidebar,
+        content: WithdrawCList
+      }
+    },
+    {
+      path: '/customer/bankcard/list',
+      name: 'BankCardList',
+      components: {
+        menubar: Menubar,
+        sidebar: CustomerSidebar,
+        content: BankCardList
+      }
+    },
+    {
+      path: '/customer/withdraw/audit',
+      name: 'WithdrawCuAudit',
+      components: {
+        menubar: Menubar,
+        sidebar: CustomerSidebar,
+        content: WithdrawCAudit
+      }
+    },
+
+    // 商家
+    {
+      path: '/merchant/list',
+      name: 'MerchantList',
+      components: {
+        menubar: Menubar,
+        sidebar: MerchantSidebar,
+        content: MerchantList
+      }
+    },
+    {
+      path: '/merchant/disabled',
+      name: 'MerchantDisabled',
+      components: {
+        menubar: Menubar,
+        sidebar: MerchantSidebar,
+        content: MerchantDisabled
+      }
+    },
+    {
+      path: '/merchant/audit',
+      name: 'MerchantAudit',
+      components: {
+        menubar: Menubar,
+        sidebar: MerchantSidebar,
+        content: MerchantAudit
+      }
+    },
+    {
+      path: '/merchant/audit/refuse',
+      name: 'MerchantAuditRefuse',
+      components: {
+        menubar: Menubar,
+        sidebar: MerchantSidebar,
+        content: MerchantRefused
+      }
+    },
+    {
+      path: '/merchant/edit',
+      name: 'MerchantEdit',
+      components: {
+        menubar: Menubar,
+        sidebar: MerchantSidebar,
+        content: MerchantEdit
+      }
+    },
+    {
+      path: '/merchant/withdraw/list',
+      name: 'WithdrawMeList',
+      components: {
+        menubar: Menubar,
+        sidebar: MerchantSidebar,
+        content: WithdrawMList
+      }
+    },
+
+    // 代理
+    {
+      path: '/agent/dashboard',
+      name: 'AgentDashboard',
+      components: {
+        menubar: Menubar,
+        sidebar: AgentSidebar,
+        content: AgentDashboard
+      }
+    },
+    {
+      path: '/agent/merchant/business',
+      name: 'AgentBusiness',
+      components: {
+        menubar: Menubar,
+        sidebar: AgentSidebar,
+        content: AgentBusiness
+      }
+    },
+    {
+      path: '/agent/merchant/list',
+      name: 'AgentMerchantList',
+      components: {
+        menubar: Menubar,
+        sidebar: AgentSidebar,
+        content: AgentMerchantList
+      }
+    },
+
+    // 激励
+    {
+      path: '/reward/xincoin/list',
+      name: 'XinCoinList',
+      components: {
+        menubar: Menubar,
+        sidebar: RewardSidebar,
+        content: XinCoinList
+      }
+    },
+    {
+      path: '/reward/yicoin/list',
+      name: 'YiCoinList',
+      components: {
+        menubar: Menubar,
+        sidebar: RewardSidebar,
+        content: YiCoinList
+      }
+    },
+
+    // 商务
+    {
+      path: '/business/order/audit',
+      name: 'ConsumptionOrderAudit',
+      components: {
+        menubar: Menubar,
+        sidebar: BusinessSidebar,
+        content: ConsumptionOrderAudit
+      }
+    },
+    {
+      path: '/business/order/list',
+      name: 'ConsumptionOrderList',
+      components: {
+        menubar: Menubar,
+        sidebar: BusinessSidebar,
+        content: ConsumptionOrderList
+      }
+    },
+    {
+      path: '/business/order/pay',
+      name: 'ConsumptionOrderPay',
+      components: {
+        menubar: Menubar,
+        sidebar: BusinessSidebar,
+        content: ConsumptionOrderPay
+      }
+    },
+    {
+      path: '/business/recharge/list',
+      name: 'MerchantRechargeList',
+      components: {
+        menubar: Menubar,
+        sidebar: BusinessSidebar,
+        content: MerchantRechargeList
+      }
+    },
+    {
+      path: '/business/recharge',
+      name: 'MerchantRecharge',
+      components: {
+        menubar: Menubar,
+        sidebar: BusinessSidebar,
+        content: MerchantRecharge
+      }
+    },
+
+    // 财务
+    {
+      path: '/finance/customer/withdraw/audit',
+      name: 'WithdrawCAudit',
+      components: {
+        menubar: Menubar,
+        sidebar: FinanceSidebar,
+        content: WithdrawCAudit
+      }
+    },
+    {
+      path: '/finance/customer/withdraw/list',
+      name: 'WithdrawCList',
+      components: {
+        menubar: Menubar,
+        sidebar: FinanceSidebar,
+        content: WithdrawCList
+      }
+    },
+    {
+      path: '/finance/merchant/withdraw/audit',
+      name: 'WithdrawMAudit',
+      components: {
+        menubar: Menubar,
+        sidebar: FinanceSidebar,
+        content: WithdrawMAudit
+      }
+    },
+    {
+      path: '/finance/merchant/withdraw/list',
+      name: 'WithdrawMList',
+      components: {
+        menubar: Menubar,
+        sidebar: FinanceSidebar,
+        content: WithdrawMList
+      }
+    },
+    // 广告
+    {
+      path: '/inform/advertise/list',
+      name: 'AdvertiseList',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: AdvertiseList
+      }
+    },
+    {
+      path: '/inform/advertise/disabled',
+      name: 'AdvertiseDisabled',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: AdvertiseDisabled
+      }
+    },
+    {
+      path: '/inform/advertise/create',
+      name: 'AdvertiseCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: AdvertiseCreate
+      }
+    },
+    {
+      path: '/inform/advertise/edit',
+      name: 'AdvertiseEdit',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: AdvertiseEdit
+      }
+    },
+    // 公告
+    {
+      path: '/inform/notice/list',
+      name: 'NoticeList',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NoticeList
+      }
+    },
+    {
+      path: '/inform/notice/disabled',
+      name: 'NoticeDisabled',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NoticeDisabled
+      }
+    },
+    {
+      path: '/inform/notice/create',
+      name: 'NoticeCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NoticeCreate
+      }
+    },
+    {
+      path: '/inform/notice/edit',
+      name: 'NoticeEdit',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NoticeEdit
+      }
+    },
+
+    // 资讯
+    {
+      path: '/inform/news/list',
+      name: 'NewsList',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NewsList
+      }
+    },
+    {
+      path: '/inform/news/create',
+      name: 'NewsCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NewsCreate
+      }
+    },
+    {
+      path: '/inform/news/edit',
+      name: 'NewsEdit',
+      components: {
+        menubar: Menubar,
+        sidebar: InformSidebar,
+        content: NewsEdit
+      }
+    },
+
+    // 标签管理
+    {
+      path: '/setting/tag/list',
+      name: 'Tag',
+      components: {
+        menubar: Menubar,
+        sidebar: SettingSidebar,
+        content: Tag
+      }
+    },
+    {
+      path: '/setting/tag/create',
+      name: 'TagCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: SettingSidebar,
+        content: TagCreate
+      }
+    },
+
+    // 平台设置
+    {
+      path: '/setting/merchant/category/list',
+      name: 'MerchantCategory',
+      components: {
+        menubar: Menubar,
+        sidebar: SettingSidebar,
+        content: MerchantCategory
+      }
+    },
+    {
+      path: '/setting/merchant/category/create',
+      name: 'MCategoryCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: SettingSidebar,
+        content: MCategoryCreate
+      }
+    },
+    {
+      path: '/system/global/setting',
+      name: 'GlobalSetting',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: GlobalSetting
+      }
+    },
+    {
+      path: '/system/app/upgrade',
+      name: 'AppUpgrade',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: AppUpgrade
+      }
+    },
+
+    // 系统设置
+    {
+      path: '/system/manager',
+      name: 'Manager',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: Manager
+      }
+    },
+    {
+      path: '/system/manager/create',
+      name: 'ManagerCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: ManagerCreate
+      }
+    },
+    {
+      path: '/system/role',
+      name: 'Role',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: Role
+      }
+    },
+    {
+      path: '/system/role/create',
+      name: 'RoleCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: RoleCreate
+      }
+    },
+    {
+      path: '/system/permission',
+      name: 'Permission',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: Permission
+      }
+    },
+    {
+      path: '/system/permission/create',
+      name: 'PermissionCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: PermissionCreate
+      }
+    },
+    {
+      path: '/system/permission/role',
+      name: 'PermissionRole',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: PermissionRole
+      }
+    },
+    {
+      path: '/system/agent',
+      name: 'Agent',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: Agent
+      }
+    },
+    {
+      path: '/system/agent/create',
+      name: 'AgentCreate',
+      components: {
+        menubar: Menubar,
+        sidebar: SystemSidebar,
+        content: AgentCreate
+      }
+    }
+  ]
+})
